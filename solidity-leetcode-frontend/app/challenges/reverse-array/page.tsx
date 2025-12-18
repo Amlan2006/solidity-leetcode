@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import CodeEditor from "../../../components/CodeEditor";
+import { SignIn, useUser } from '@clerk/nextjs';
 
 const INITIAL_CODE = `function reverseArray(uint[] memory nums) public pure returns (uint[] memory) {
     // Your code here
@@ -13,6 +14,7 @@ export default function ReverseArrayChallenge() {
   const [code, setCode] = useState(INITIAL_CODE);
   const [result, setResult] = useState<{ success: boolean; output: string } | null>(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -39,7 +41,8 @@ export default function ReverseArrayChallenge() {
     }
   };
 
-  return (
+    
+  return user ? (
     <div className="min-h-screen bg-gray-900 text-white">
       <nav className="bg-gray-800 border-b border-gray-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -116,6 +119,10 @@ Output: [30,20,10]`}
         )}
       </div>
     </div>
-  );
+  ):(
+         <div className='w-full h-[95vh] flex items-center justify-center'>
+               <SignIn />
+            </div>
+      );
 }
 

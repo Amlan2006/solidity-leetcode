@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from "next/navigation";
 
 interface Challenge {
   id: string;
@@ -51,8 +53,14 @@ const difficultyColors = {
 export default function ChallengesPage() {
   const [availableChallenges, setAvailableChallenges] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
+    if(!user) {
+      router.push("/Login")
+      return ;
+    }
     fetch("http://localhost:3001/challenges")
       .then((res) => res.json())
       .then((data) => {
@@ -127,6 +135,6 @@ export default function ChallengesPage() {
         )}
       </div>
     </div>
-  );
+  )
 }
 

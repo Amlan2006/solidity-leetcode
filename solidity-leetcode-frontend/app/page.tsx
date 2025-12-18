@@ -1,9 +1,12 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function Home() {
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
@@ -62,7 +65,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
           <div className="space-y-8">
             <div className="flex items-start gap-6">
-              <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-xl">
+              <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-xl">
                 1
               </div>
               <div>
@@ -74,7 +77,7 @@ export default function Home() {
             </div>
 
             <div className="flex items-start gap-6">
-              <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center font-bold text-xl">
+              <div className="shrink-0 w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center font-bold text-xl">
                 2
               </div>
               <div>
@@ -131,5 +134,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }

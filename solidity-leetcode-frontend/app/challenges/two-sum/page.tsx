@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import CodeEditor from "../../../components/CodeEditor";
+import { SignIn, useUser } from '@clerk/nextjs';
 
 const INITIAL_CODE = `function twoSum(uint[] memory nums, uint target) public pure returns (uint, uint) {
     // Your code here
@@ -14,6 +15,7 @@ export default function TwoSumChallenge() {
   const [code, setCode] = useState(INITIAL_CODE);
   const [result, setResult] = useState<{ success: boolean; output: string } | null>(null);
   const [loading, setLoading] = useState(false);
+     const { user } = useUser();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -40,7 +42,8 @@ export default function TwoSumChallenge() {
     }
   };
 
-  return (
+
+  return user ? (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Navigation */}
       <nav className="bg-gray-800 border-b border-gray-700">
@@ -136,6 +139,10 @@ Output: (1, 2)`}
         )}
       </div>
     </div>
-  );
+  ):(
+       <div className='w-full h-[95vh] flex items-center justify-center'>
+             <SignIn />
+          </div>
+    );
 }
 
