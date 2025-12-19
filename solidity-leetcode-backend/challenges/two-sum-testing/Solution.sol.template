@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Solution {
+    /**
+     * @dev Given an array of integers nums and an integer target, 
+     * return indices of the two numbers such that they add up to target.
+     */
+    function twoSum(uint[] memory nums, uint target) public pure returns (uint[2] memory) {
+        {{USER_CODE}}
+    }
+}
