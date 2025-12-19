@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import CodeEditor from "../../../components/CodeEditor";
+import { SignIn, useUser } from '@clerk/nextjs';
 
 const INITIAL_CODE = `function containsDuplicate(uint[] memory nums) public pure returns (bool) {
     // Your code here
@@ -14,6 +15,7 @@ export default function ContainsDuplicateChallenge() {
   const [code, setCode] = useState(INITIAL_CODE);
   const [result, setResult] = useState<{ success: boolean; output: string } | null>(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -39,8 +41,9 @@ export default function ContainsDuplicateChallenge() {
       setLoading(false);
     }
   };
+  
 
-  return (
+  return user ? (
     <div className="min-h-screen bg-gray-900 text-white">
       <nav className="bg-gray-800 border-b border-gray-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -125,6 +128,10 @@ Output: true`}
         )}
       </div>
     </div>
-  );
+  ):(
+         <div className='w-full h-[95vh] flex items-center justify-center'>
+               <SignIn />
+            </div>
+      );
 }
 
